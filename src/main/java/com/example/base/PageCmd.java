@@ -2,6 +2,7 @@ package com.example.base;
 
 public class PageCmd {
 	private Integer pageNo;
+	private Integer pageOffset;
 	private Integer pageSize;
 	private Integer offset;
 	
@@ -10,6 +11,12 @@ public class PageCmd {
 	}
 	public void setPageNo(Integer pageNo) {
 		this.pageNo = pageNo;
+	}
+	public Integer getPageOffset() {
+		return pageOffset;
+	}
+	public void setPageOffset(Integer pageOffset) {
+		this.pageOffset = pageOffset;
 	}
 	public Integer getPageSize() {
 		return pageSize;

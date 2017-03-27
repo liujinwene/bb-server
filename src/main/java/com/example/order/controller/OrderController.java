@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.annotation.ResponseLog;
 import com.example.base.RestResp;
 import com.example.order.cmd.CreateOrderAddressCmd;
 import com.example.order.cmd.CreateOrderCmd;
@@ -32,6 +31,17 @@ public class OrderController {
 	@RequestMapping("/listOrder")
 	public Object listOrder(ListOrderCmd cmd) {
 		return new RestResp(orderService.listOrder(cmd));
+	}
+	
+	@RequestMapping("/testListOrder")
+	public Object testListOrder() {
+		return new RestResp(orderService.testListOrder("123"));
+	}
+	
+	@RequestMapping("/clearListOrder")
+	public Object clearListOrder() {
+		orderService.clearListOrder();
+		return new RestResp();
 	}
 	
 	@RequestMapping("/testCreate")

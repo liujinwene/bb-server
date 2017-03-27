@@ -8,6 +8,9 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.example.base.DeleteFlag;
@@ -88,13 +91,21 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public List<OrderDetailDTO> listOrder(ListOrderCmd cmd) {
+	public List<OrderDetailDTO> listOrder(ListOrderCmd  cmd) {
 		cmd.setPageNo(PageUtil.getPageNoInDefault(cmd.getPageNo()));
 		cmd.setPageSize(PageUtil.getPageSizeInDefault(cmd.getPageSize()));
 		cmd.setOffset(PageUtil.getStartPageOffset(cmd.getPageSize(), cmd.getPageNo()));
 		return orderDao.listOrder(cmd);
 	}
-
+	
+	@Override
+	@Cacheable(value = "testListOrder", keyGenerator="wiselyKeyGenerator")
+	public List<OrderDetailDTO> testListOrder(String key) {
+		System.out.println("test listOrder");
+		ListOrderCmd cmd = new ListOrderCmd();
+		return orderDao.listOrder(cmd);
+	}
+	
 	private void setOrderOtherParameter(Order order, List<OrderItem> orderItems) {
 		Integer totalQuantity = 0;
 		BigDecimal totalAmount = BigDecimal.ZERO;
@@ -346,6 +357,12 @@ public class OrderServiceImpl implements OrderService {
 			throw RestRunningException.error("用户名不能为空");
 		}
 
+	}
+
+	@Override
+	@Caching(evict={@CacheEvict(value="listOrder", keyGenerator="wiselyKeyGenerator")})
+	public void clearListOrder() {
+		System.out.println("clear listOrder success");
 	}
 
 }
