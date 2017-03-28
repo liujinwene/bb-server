@@ -9,8 +9,8 @@ import org.apache.http.HttpStatus;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.base.RestResp;
-import com.example.base.RestRunningException;
+import com.example.base.exception.RestRunningException;
+import com.example.base.resp.RestResp;
 import com.example.base.utils.JsonUtil;
 
 public class ExceptionHandler implements HandlerExceptionResolver {

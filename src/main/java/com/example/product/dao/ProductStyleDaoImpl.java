@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.base.HibernateDaoImpl;
+import com.example.base.dao.HibernateDaoImpl;
 import com.example.product.cmd.ListProductByCdCmd;
 import com.example.product.cmd.ListProductStyleByCdCmd;
 import com.example.product.po.ProductStyle;

@@ -1,4 +1,6 @@
-package com.example.base;
+package com.example.base.exception;
+
+import com.example.base.constant.ErrorCodes;
 
 public class RestRunningException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package com.example.base;
+package com.example.base.constant;
 
 public class ErrorCodes {
 	//version

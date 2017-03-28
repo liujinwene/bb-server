@@ -1,6 +1,6 @@
 package com.example.order.cmd;
 
-import com.example.base.PageCmd;
+import com.example.base.cmd.PageCmd;
 
 public class ListOrderAddressByCdCmd extends PageCmd {
 	private Long addressNo;

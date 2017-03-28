@@ -1,4 +1,4 @@
-package com.example.base;
+package com.example.base.cmd;
 
 public class PageCmd {
 	private Integer pageNo;

@@ -12,7 +12,7 @@ import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.base.HibernateDaoImpl;
+import com.example.base.dao.HibernateDaoImpl;
 import com.example.order.cmd.ListOrderByCdCmd;
 import com.example.order.cmd.ListOrderCmd;
 import com.example.order.dto.OrderDetailDTO;

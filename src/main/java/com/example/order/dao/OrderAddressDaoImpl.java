@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.base.HibernateDaoImpl;
+import com.example.base.dao.HibernateDaoImpl;
 import com.example.order.cmd.ListOrderAddressByCdCmd;
 import com.example.order.cmd.ListOrderByCdCmd;
 import com.example.order.po.OrderAddress;

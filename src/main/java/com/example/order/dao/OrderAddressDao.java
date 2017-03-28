@@ -2,7 +2,7 @@ package com.example.order.dao;
 
 import java.util.List;
 
-import com.example.base.HibernateDao;
+import com.example.base.dao.HibernateDao;
 import com.example.order.cmd.ListOrderAddressByCdCmd;
 import com.example.order.po.OrderAddress;
 

@@ -1,4 +1,6 @@
-package com.example.base;
+package com.example.base.resp;
+
+import com.example.base.constant.ErrorCodes;
 
 public class RestResp {
 	private String version;

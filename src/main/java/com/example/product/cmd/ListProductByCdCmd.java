@@ -1,6 +1,6 @@
 package com.example.product.cmd;
 
-import com.example.base.PageCmd;
+import com.example.base.cmd.PageCmd;
 
 public class ListProductByCdCmd extends PageCmd {
 	private Long productNo;

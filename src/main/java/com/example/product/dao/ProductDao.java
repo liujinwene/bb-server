@@ -2,7 +2,7 @@ package com.example.product.dao;
 
 import java.util.List;
 
-import com.example.base.HibernateDao;
+import com.example.base.dao.HibernateDao;
 import com.example.product.cmd.ListProductByCdCmd;
 import com.example.product.po.Product;
 

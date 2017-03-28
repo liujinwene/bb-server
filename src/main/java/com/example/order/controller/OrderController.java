@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.base.RestResp;
+import com.example.base.resp.RestResp;
 import com.example.order.cmd.CreateOrderCmd;
 import com.example.order.cmd.ListOrderCmd;
 import com.example.order.service.OrderService;

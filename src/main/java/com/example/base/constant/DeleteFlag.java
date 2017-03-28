@@ -1,4 +1,4 @@
-package com.example.base;
+package com.example.base.constant;
 
 public enum DeleteFlag {
 	NO((byte)0, "否"),

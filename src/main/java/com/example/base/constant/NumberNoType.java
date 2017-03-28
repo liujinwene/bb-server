@@ -1,4 +1,4 @@
-package com.example.base;
+package com.example.base.constant;
 
 public class NumberNoType {
 	public static final String ORDER = "order";
