@@ -27,6 +27,7 @@ public class OrderDaoImpl extends HibernateDaoImpl<Order> implements OrderDao {
 	public List<Order> listByCd(ListOrderByCdCmd cmd) {
 		Criteria criteria = createCriteria();
 		addCondition(criteria, cmd);
+		pageBy(criteria, cmd);
 		return criteria.list();
 	}
 
@@ -80,20 +81,33 @@ public class OrderDaoImpl extends HibernateDaoImpl<Order> implements OrderDao {
 				+ " where 1=1";
 		
 		Map<String, Object> values = new HashMap<String, Object>();
-		sql = addcondition(sql, cmd, values);
+		sql = addCondition(sql, cmd, values);
 		
 		Query query = createSQLQuery(sql, values);
 		query.setResultTransformer(Transformers.aliasToBean(OrderDetailDTO.class));
+		pageBy(query, cmd);
+		return query.list();
+	}
+	
+	private void pageBy(Criteria criteria, ListOrderByCdCmd cmd) {
+		if(cmd.getPageSize() != null) {
+			criteria.setMaxResults(cmd.getPageSize());
+		}
+		if(cmd.getOffset() != null) {
+			criteria.setFirstResult(cmd.getOffset());
+		}
+	}
+	
+	private void pageBy(Query query, ListOrderCmd cmd) {
 		if(cmd.getPageSize() != null) {
 			query.setMaxResults(cmd.getPageSize());
 		}
 		if(cmd.getOffset() != null) {
 			query.setFirstResult(cmd.getOffset());
 		}
-		return query.list();
 	}
-	
-	private String addcondition(String sql, ListOrderCmd cmd, Map<String, Object> values) {
+
+	private String addCondition(String sql, ListOrderCmd cmd, Map<String, Object> values) {
 		return sql;
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.base.HibernateDaoImpl;
 import com.example.order.cmd.ListOrderAddressByCdCmd;
+import com.example.order.cmd.ListOrderByCdCmd;
 import com.example.order.po.OrderAddress;
 
 
@@ -21,6 +22,7 @@ public class OrderAddressDaoImpl extends HibernateDaoImpl<OrderAddress> implemen
 	public List<OrderAddress> listByCd(ListOrderAddressByCdCmd cmd) {
 		Criteria criteria = createCriteria();
 		addCondition(criteria, cmd);
+		pageBy(criteria, cmd);
 		return criteria.list();
 	}
 
@@ -73,6 +75,15 @@ public class OrderAddressDaoImpl extends HibernateDaoImpl<OrderAddress> implemen
 		if(cmd.getDeleteFlag() != null) {
 			criteria.add(Restrictions.eq("deleteFlag", cmd.getDeleteFlag()));
 		}
+		if(cmd.getPageSize() != null) {
+			criteria.setMaxResults(cmd.getPageSize());
+		}
+		if(cmd.getOffset() != null) {
+			criteria.setFirstResult(cmd.getOffset());
+		}
+	}
+	
+	private void pageBy(Criteria criteria, ListOrderAddressByCdCmd cmd) {
 		if(cmd.getPageSize() != null) {
 			criteria.setMaxResults(cmd.getPageSize());
 		}

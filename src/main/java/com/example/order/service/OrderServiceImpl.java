@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.example.base.DeleteFlag;
@@ -91,18 +90,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
+	@Cacheable(value = "Order-ListOrder", key="{#cmd.pageSize, #cmd.pageNo}")
 	public List<OrderDetailDTO> listOrder(ListOrderCmd  cmd) {
 		cmd.setPageNo(PageUtil.getPageNoInDefault(cmd.getPageNo()));
 		cmd.setPageSize(PageUtil.getPageSizeInDefault(cmd.getPageSize()));
 		cmd.setOffset(PageUtil.getStartPageOffset(cmd.getPageSize(), cmd.getPageNo()));
-		return orderDao.listOrder(cmd);
-	}
-	
-	@Override
-	@Cacheable(value = "testListOrder", keyGenerator="wiselyKeyGenerator")
-	public List<OrderDetailDTO> testListOrder(String key) {
-		System.out.println("test listOrder");
-		ListOrderCmd cmd = new ListOrderCmd();
 		return orderDao.listOrder(cmd);
 	}
 	
@@ -360,9 +352,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	@Caching(evict={@CacheEvict(value="listOrder", keyGenerator="wiselyKeyGenerator")})
-	public void clearListOrder() {
-		System.out.println("clear listOrder success");
+	@CacheEvict(value = "Order-ListOrder", key="{#cmd.pageSize, #cmd.pageNo}")
+	public void clearListOrder(ListOrderCmd cmd) {
+		System.out.println("clearListOrder");
 	}
-
 }

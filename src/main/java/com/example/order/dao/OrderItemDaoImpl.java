@@ -21,9 +21,28 @@ public class OrderItemDaoImpl extends HibernateDaoImpl<OrderItem> implements Ord
 	public List<OrderItem> listByCd(ListOrderItemByCdCmd cmd) {
 		Criteria criteria = createCriteria();
 		addCondition(criteria, cmd);
+		pageBy(criteria, cmd);
 		return criteria.list();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public OrderItem findByCd(ListOrderItemByCdCmd cmd) {
+		List<OrderItem> list = listByCd(cmd);
+		if(list != null && !list.isEmpty()) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Long findCountByCd(ListOrderItemByCdCmd cmd) {
+		Criteria criteria = createCriteria();
+		addCondition(criteria, cmd);
+		return getCount(criteria);
+	}
+	
 	private void addCondition(Criteria criteria, ListOrderItemByCdCmd cmd) {
 		if(cmd.getOrderItemNo() != null) {
 			criteria.add(Restrictions.eq("orderItemNo", cmd.getOrderItemNo()));
@@ -59,22 +78,13 @@ public class OrderItemDaoImpl extends HibernateDaoImpl<OrderItem> implements Ord
 			criteria.setFirstResult(cmd.getOffset());
 		}
 	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public OrderItem findByCd(ListOrderItemByCdCmd cmd) {
-		List<OrderItem> list = listByCd(cmd);
-		if(list != null && !list.isEmpty()) {
-			return list.get(0);
+	
+	private void pageBy(Criteria criteria, ListOrderItemByCdCmd cmd) {
+		if(cmd.getPageSize() != null) {
+			criteria.setMaxResults(cmd.getPageSize());
 		}
-		return null;
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Long findCountByCd(ListOrderItemByCdCmd cmd) {
-		Criteria criteria = createCriteria();
-		addCondition(criteria, cmd);
-		return getCount(criteria);
+		if(cmd.getOffset() != null) {
+			criteria.setFirstResult(cmd.getOffset());
+		}
 	}
 }

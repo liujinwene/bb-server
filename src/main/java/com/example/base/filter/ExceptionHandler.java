@@ -17,6 +17,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object arg2, Exception exception) {
+		exception.printStackTrace();
 		RestResp resp = new RestResp("额,不知道哪里又错了!");
 
 		if(exception instanceof RestRunningException) {
