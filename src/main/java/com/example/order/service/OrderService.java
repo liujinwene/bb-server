@@ -10,4 +10,5 @@ public interface OrderService {
 	void createOrder(CreateOrderCmd cmd);
 	List<OrderDetailDTO> listOrder(ListOrderCmd cmd);
 	void clearListOrder(ListOrderCmd cmd);
+	List<OrderDetailDTO> listOrder2(ListOrderCmd cmd);
 }

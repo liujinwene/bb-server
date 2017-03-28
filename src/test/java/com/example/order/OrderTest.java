@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.example.base.core.CoreMain;
+import com.example.base.core.CoreServerApp;
 import com.example.base.utils.JsonUtil;
 import com.example.order.cmd.CreateOrderAddressCmd;
 import com.example.order.cmd.CreateOrderCmd;
@@ -23,7 +23,7 @@ import com.example.order.dto.OrderDetailDTO;
 import com.example.order.service.OrderService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = CoreMain.class)
+@SpringBootTest(classes = CoreServerApp.class)
 @WebAppConfiguration
 public class OrderTest {
 	

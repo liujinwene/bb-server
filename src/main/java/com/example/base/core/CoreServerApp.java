@@ -21,10 +21,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @PropertySource(value={"classpath:config/application.properties"}, ignoreResourceNotFound=true)
 @ImportResource("classpath:META-INF/applicationContext.xml")
-public class CoreMain {
+public class CoreServerApp {
 	
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(CoreMain.class);
+		SpringApplication app = new SpringApplication(CoreServerApp.class);
 		app.setWebEnvironment(true);
 		app.run(args);
 	}

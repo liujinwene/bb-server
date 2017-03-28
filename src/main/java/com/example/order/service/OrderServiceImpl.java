@@ -98,6 +98,15 @@ public class OrderServiceImpl implements OrderService {
 		return orderDao.listOrder(cmd);
 	}
 	
+	@Override
+	@Cacheable(value = "Order-ListOrder2", key="{#cmd.pageSize, #cmd.pageNo}")
+	public List<OrderDetailDTO> listOrder2(ListOrderCmd  cmd) {
+		cmd.setPageNo(PageUtil.getPageNoInDefault(cmd.getPageNo()));
+		cmd.setPageSize(PageUtil.getPageSizeInDefault(cmd.getPageSize()));
+		cmd.setOffset(PageUtil.getStartPageOffset(cmd.getPageSize(), cmd.getPageNo()));
+		return orderDao.listOrder(cmd);
+	}
+	
 	private void setOrderOtherParameter(Order order, List<OrderItem> orderItems) {
 		Integer totalQuantity = 0;
 		BigDecimal totalAmount = BigDecimal.ZERO;
